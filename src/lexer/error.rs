@@ -1,5 +1,9 @@
-use crate::diagnostic::{Diagnostic, DiagnosticCode, Span};
 use thiserror::Error;
+
+use crate::{
+    diagnostic::{Diagnostic, DiagnosticCode},
+    span::Span,
+};
 
 #[derive(Error, Debug, Clone, PartialEq, Default)]
 pub enum LexError {

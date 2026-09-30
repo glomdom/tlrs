@@ -1,7 +1,7 @@
 use crate::{
-    diagnostic::Span,
     lexer::Token,
     source_map::{SourceFile, SourceMap},
+    span::Span,
 };
 
 use anyhow::bail;
@@ -11,6 +11,7 @@ use std::fs;
 mod diagnostic;
 mod lexer;
 mod source_map;
+mod span;
 
 fn main() -> anyhow::Result<()> {
     let path = "examples/vars.tl";

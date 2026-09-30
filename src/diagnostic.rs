@@ -1,6 +1,7 @@
-use crate::source_map::{FileId, SourceMap};
 use ariadne::{Label, Report, ReportKind, Source};
-use std::{io, range::Range};
+use std::io;
+
+use crate::{source_map::SourceMap, span::Span};
 
 #[derive(Debug, Clone, Copy)]
 #[repr(u16)]
@@ -77,28 +78,5 @@ impl Diagnostic {
             .eprint((file_path, Source::from(&file.text)))?;
 
         Ok(())
-    }
-}
-
-#[derive(Debug, Clone, Copy)]
-pub struct Span {
-    file: FileId,
-    range: Range<usize>,
-}
-
-impl Span {
-    pub fn new(id: FileId, range: Range<usize>) -> Self {
-        Self { file: id, range }
-    }
-
-    pub fn ops_range(self) -> std::ops::Range<usize> {
-        self.range.into()
-    }
-
-    pub fn single_end(self) -> Self {
-        Self {
-            file: self.file,
-            range: (self.range.end..self.range.end + 1).into(),
-        }
     }
 }
